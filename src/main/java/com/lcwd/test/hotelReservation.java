@@ -7,7 +7,7 @@ import java.util.Map;
 
 class HotelFinder {
 
-    private static final Map<String, Map<LocalDate, Integer>> hotels = new HashMap<>();
+    public static final Map<String, Map<LocalDate, Integer>> hotels = new HashMap<>();
 
     static {
         Map<LocalDate, Integer> lakewoodRates = new HashMap<>();
@@ -40,7 +40,7 @@ class HotelFinder {
         System.out.println("Cheapest hotel: " + cheapestHotel + ", Total Rates: $" + totalRates);
     }
 
-    private static String findCheapestHotel(LocalDate startDate, LocalDate endDate) {
+    public static String findCheapestHotel(LocalDate startDate, LocalDate endDate) {
         String cheapestHotel = null;
         int cheapestRate = Integer.MAX_VALUE;
 
@@ -54,7 +54,7 @@ class HotelFinder {
         return cheapestHotel;
     }
 
-    private static int calculateTotalRates(String hotel, LocalDate startDate, LocalDate endDate) {
+    public static int calculateTotalRates(String hotel, LocalDate startDate, LocalDate endDate) {
         int totalRate = 0;
         Map<LocalDate, Integer> rates = hotels.get(hotel);
 

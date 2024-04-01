@@ -4,7 +4,7 @@ package com.lcwd.test;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HotelFinderTest {
 
@@ -20,10 +20,14 @@ class HotelFinderTest {
         LocalDate endDate = LocalDate.parse(endDateStr, DateTimeFormatter.ofPattern("ddMMMyyyy"));
 
         HotelFinder hotelFinder = new HotelFinder();
+
         String cheapestHotel = hotelFinder.findCheapestHotel(startDate, endDate);
-        int totalRates = hotelFinder.calculateTotalRates(cheapestHotel, startDate, endDate);
 
         assertEquals(expectedHotel, cheapestHotel);
+
+
+        int totalRates = hotelFinder.calculateTotalRates(cheapestHotel, startDate, endDate);
+
         assertEquals(expectedTotalRates, totalRates);
     }
 }
