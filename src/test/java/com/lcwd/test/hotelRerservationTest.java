@@ -1,26 +1,29 @@
 package com.lcwd.test;
 
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import static org.junit.jupiter.api.Assertions.*;
 
-class HotelReservationSystemTest {
+class HotelFinderTest {
 
     @Test
-    public void testAddHotelAndSetRegularRate() {
-        HotelReservationSystem reservationSystem = new HotelReservationSystem();
+    public void testFindCheapestHotel() {
+        String startDateStr = "10Sep2020";
+        String endDateStr = "11Sep2020";
 
+        String expectedHotel = "Lakewood";
+        int expectedTotalRates = 220;
 
-        reservationSystem.addHotel("Lakewood");
+        LocalDate startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ofPattern("ddMMMyyyy"));
+        LocalDate endDate = LocalDate.parse(endDateStr, DateTimeFormatter.ofPattern("ddMMMyyyy"));
 
+        HotelFinder hotelFinder = new HotelFinder();
+        String cheapestHotel = hotelFinder.findCheapestHotel(startDate, endDate);
+        int totalRates = hotelFinder.calculateTotalRates(cheapestHotel, startDate, endDate);
 
-        reservationSystem.setRegularRate("Lakewood", "Weekday", 110);
-        reservationSystem.setRegularRate("Lakewood", "Weekend", 90);
-
-
-        Assertions.assertEquals(110, reservationSystem.getRegularRate("Lakewood", "Weekday"));
-        Assertions.assertEquals(90, reservationSystem.getRegularRate("Lakewood", "Weekend"));
-
-
+        assertEquals(expectedHotel, cheapestHotel);
+        assertEquals(expectedTotalRates, totalRates);
     }
 }
