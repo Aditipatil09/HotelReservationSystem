@@ -41,20 +41,17 @@ class Hotel {
     }
 }
 
-class HotelFinder {
-    public Hotel findCheapestBestRatedHotel(Hotel... hotels) {
-        Hotel cheapestHotel = null;
-        int minRate = Integer.MAX_VALUE;
+ class HotelFinder {
+    public Hotel findBestRatedHotel(Hotel... hotels) {
+        Hotel bestRatedHotel = null;
         int maxRating = Integer.MIN_VALUE;
 
         for (Hotel hotel : hotels) {
-            int totalRate = hotel.getTotalRate("11Sep2020", "12Sep2020");
-            if (totalRate < minRate || (totalRate == minRate && hotel.getRating() > maxRating)) {
-                minRate = totalRate;
+            if (hotel.getRating() > maxRating) {
                 maxRating = hotel.getRating();
-                cheapestHotel = hotel;
+                bestRatedHotel = hotel;
             }
         }
-        return cheapestHotel;
+        return bestRatedHotel;
     }
 }
