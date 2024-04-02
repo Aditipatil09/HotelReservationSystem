@@ -1,26 +1,32 @@
 package com.lcwd.test;
 
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
-class HotelReservationSystemTest {
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+ class HotelFinderTest {
 
     @Test
-    public void testAddHotelAndSetRegularRate() {
-        HotelReservationSystem reservationSystem = new HotelReservationSystem();
+    public void testFindCheapestBestRatedHotel() {
+
+        Hotel bridgewood = new Hotel("Bridgewood", 4);
+        bridgewood.addRate("11Sep2020", 100);
+        bridgewood.addRate("12Sep2020", 100);
+
+        Hotel lakewood = new Hotel("Lakewood", 3);
+        lakewood.addRate("11Sep2020", 110);
+        lakewood.addRate("12Sep2020", 90);
 
 
-        reservationSystem.addHotel("Lakewood");
+        HotelFinder finder = new HotelFinder();
 
 
-        reservationSystem.setRegularRate("Lakewood", "Weekday", 110);
-        reservationSystem.setRegularRate("Lakewood", "Weekend", 90);
+        Hotel cheapestHotel = finder.findCheapestBestRatedHotel(bridgewood, lakewood);
 
 
-        Assertions.assertEquals(110, reservationSystem.getRegularRate("Lakewood", "Weekday"));
-        Assertions.assertEquals(90, reservationSystem.getRegularRate("Lakewood", "Weekend"));
-
-
+        assertEquals("Bridgewood", cheapestHotel.getName());
+        assertEquals(4, cheapestHotel.getRating());
+        assertEquals(200, cheapestHotel.getTotalRate("11Sep2020", "12Sep2020"));
     }
 }
